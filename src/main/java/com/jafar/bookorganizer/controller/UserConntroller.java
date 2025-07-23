@@ -31,15 +31,17 @@ public class UserConntroller {
         return userService.getAllUsers();
     }
 
+
     @PutMapping("updateuser")
     public User updateUser(@AuthenticationPrincipal UserDetails userDetails,@RequestBody User user){
         String username = userDetails.getUsername();
         return userService.updateUser(username,user);
     }
-    @PutMapping("/{name}")
-    public User updateUserRole(@PathVariable String name,@RequestBody User user){
-        return userService.updateUserRole(name ,user);
-    }
+
+//    @PutMapping("/{name}")
+//    public User updateUserRole(@PathVariable String name,@RequestBody User user){
+//        return userService.updateUserRole(name ,user);
+//    }
 
     @DeleteMapping("/{name}")
     public void deleteUser(@PathVariable String name){

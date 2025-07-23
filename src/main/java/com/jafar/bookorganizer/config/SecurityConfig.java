@@ -4,6 +4,7 @@ import com.jafar.bookorganizer.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -31,6 +32,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf-> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.DELETE,"/user/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/user/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/user/getall").hasRole("ADMIN")
+                        .requestMatchers("/user").authenticated()
+                        .requestMatchers("/book/**").hasAnyRole("STAFF","ADMIN")
+                        .requestMatchers("/userbook/**").hasAnyRole("STAFF","ADMIN")
                         .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())

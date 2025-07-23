@@ -54,21 +54,21 @@ public class UserService {
         return user;
     }
 
-    public User updateUserRole(String name,User updatedUser){
-        User user = userRepository.findByName(name).orElseThrow(()->new RuntimeException("User not found with name "+name));
-        List<String > updatedRoles = new ArrayList<>();
-        updatedRoles.add("ROLE_USER");
-        if (!updatedUser.getRoles().isEmpty()) {
-            for (String role : updatedUser.getRoles()) {
-                String fullRole = "ROLE_"+role.toUpperCase();
-                if (!updatedRoles.contains(fullRole)){
-                    updatedRoles.add(fullRole);
-                }
-            }
-        }
-        user.setRoles(updatedRoles);
-        return userRepository.save(user);
-    }
+//    public User updateUserRole(String name,User updatedUser){
+//        User user = userRepository.findByName(name).orElseThrow(()->new RuntimeException("User not found with name "+name));
+//        List<String > updatedRoles = new ArrayList<>();
+//        updatedRoles.add("ROLE_USER");
+//        if (!updatedUser.getRoles().isEmpty()) {
+//            for (String role : updatedUser.getRoles()) {
+//                String fullRole = "ROLE_"+role.toUpperCase();
+//                if (!updatedRoles.contains(fullRole)){
+//                    updatedRoles.add(fullRole);
+//                }
+//            }
+//        }
+//        user.setRoles(updatedRoles);
+//        return userRepository.save(user);
+//    }
 
     @Transactional
     public void deleteUser(String name){

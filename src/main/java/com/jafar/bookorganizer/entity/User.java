@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -22,5 +23,6 @@ public class User {
     @NonNull
     private String email;
     private List<String> roles = new ArrayList<>();
+    @DBRef
     private List<Book> books = new ArrayList<>();
 }
