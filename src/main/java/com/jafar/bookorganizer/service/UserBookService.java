@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +26,7 @@ public class UserBookService {
         Book book = bookRepository.findByBookname(bookname).orElseThrow(() -> new RuntimeException("Book not with name " + bookname));
         user.getBooks().add(book);
         book.setPresent(false);
+        book.setTakenAt(LocalDateTime.now());
         bookRepository.save(book);
         userRepository.save(user);
         return user;
@@ -45,6 +47,7 @@ public class UserBookService {
             removed = user.getBooks().removeIf(b -> b.getId().equals(book.getId()));
             if (removed){
                 book.setPresent(true);
+                book.setTakenAt(null);
                 bookRepository.save(book);
                 userRepository.save(user);
             }

@@ -38,7 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/user").authenticated()
                         .requestMatchers("/book/**").hasAnyRole("STAFF","ADMIN")
                         .requestMatchers("/userbook/**").hasAnyRole("STAFF","ADMIN")
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/**").permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
