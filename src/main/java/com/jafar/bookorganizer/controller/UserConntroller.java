@@ -15,6 +15,7 @@ public class UserConntroller {
     @Autowired
     private UserService userService;
 
+    //Only Admin
     @PostMapping("/add")
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
@@ -26,6 +27,7 @@ public class UserConntroller {
         return userService.getUserByName(username);
     }
 
+    //Only Admin
     @GetMapping("/getall")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
@@ -43,6 +45,7 @@ public class UserConntroller {
 //        return userService.updateUserRole(name ,user);
 //    }
 
+    //Only Admin
     @DeleteMapping("/{name}")
     public void deleteUser(@PathVariable String name){
         userService.deleteUser(name);

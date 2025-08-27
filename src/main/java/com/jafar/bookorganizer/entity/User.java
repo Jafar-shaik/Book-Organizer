@@ -20,7 +20,7 @@ public class User {
     private String name;
     @NonNull
     private String password;
-    @NonNull
+
     private String email;
     private List<String> roles = new ArrayList<>();
     @DBRef
